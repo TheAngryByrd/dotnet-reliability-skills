@@ -5,12 +5,12 @@ description: >
   map the system, identify failure-prone areas and testable properties, and
   produce the research artifacts needed for workload and environment planning.
 metadata:
-  version: "2026-09-08 2e4a837"
+  version: "2026-09-16 6cf90e4"
 ---
 
 # Antithesis Research
 
-**Skill version:** `2026-09-08 2e4a837`
+**Skill version:** `2026-09-16 6cf90e4`
 
 ## Purpose and Goal
 
