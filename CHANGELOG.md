@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. Entries
 are grouped by date (UTC) with newest first.
 
+## 2026-09-22
+
+- Add antithesis-review-inputs skill ([PR #201](https://github.com/antithesishq/antithesis-skills/pull/201))
+
 ## 2026-09-16
 
 - feat: add antithesis-mutation-testing skill ([PR #200](https://github.com/antithesishq/antithesis-skills/pull/200))
