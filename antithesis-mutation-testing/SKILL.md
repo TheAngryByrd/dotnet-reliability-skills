@@ -9,12 +9,12 @@ description: >
   a baseline run is green.
 compatibility: Requires the `docker-compose` binary (Docker Compose v2), which snouty execs directly; `podman compose` is not supported, though podman as the container runtime behind `DOCKER_HOST` is fine. Also requires snouty (https://github.com/antithesishq/snouty), jq, git, and rsync. Crediting collateral damage additionally needs the antithesis-query-logs skill and its authenticated agent-browser; without it, credit only what the counterexample logs can establish.
 metadata:
-  version: "2026-09-22 feb26ff"
+  version: "2026-09-22 da29297"
 ---
 
 # Antithesis Mutation Testing
 
-**Skill version:** `2026-09-22 feb26ff`
+**Skill version:** `2026-09-22 da29297`
 
 ## Purpose and Goal
 
