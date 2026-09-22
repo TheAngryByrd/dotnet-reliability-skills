@@ -5,6 +5,7 @@ are grouped by date (UTC) with newest first.
 
 ## 2026-09-22
 
+- feat: add antithesis-feature-workload skill ([PR #198](https://github.com/antithesishq/antithesis-skills/pull/198))
 - Add antithesis-review-inputs skill ([PR #201](https://github.com/antithesishq/antithesis-skills/pull/201))
 
 ## 2026-09-16
