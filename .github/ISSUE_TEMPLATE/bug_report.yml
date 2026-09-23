@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a problem with the Antithesis skills
+description: Report a problem with the .NET reliability skills
 labels: ["bug"]
 body:
   - type: markdown
@@ -33,7 +33,7 @@ body:
     attributes:
       label: Skill
       description: Which skill were you using?
-      placeholder: "e.g. antithesis-triage, antithesis-debug, antithesis-setup"
+      placeholder: "e.g. dotnet-test-triage, dotnet-feature-workload"
     validations:
       required: true
 

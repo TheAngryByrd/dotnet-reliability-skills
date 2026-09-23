@@ -1,0 +1,14 @@
+.NET reliability skills
+
+Derived from antithesishq/antithesis-skills at commit
+1fd8470d36a9629a75bda4619a5589d679a40d7c.
+Copyright 2026 Antithesis Operations LLC.
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+This distribution modifies the skill instructions, references, package identity,
+documentation, and validation workflow for C#/F# libraries and .NET runtime
+semantics. Hosted-platform skills and their helpers are excluded. New .NET
+examples and verification tooling are included.
+
+Original versions and attribution remain available in Git history.
+This fork is not an Antithesis product or an endorsement by Antithesis.

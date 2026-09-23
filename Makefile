@@ -1,14 +1,13 @@
 .PHONY: validate validate-changelog validate-links install-dev test
 
 validate:
-	uv run python scripts/validate-skills.py
+	python scripts/validate-skills.py
 
 validate-changelog:
-	python3 .ci-scripts/changelog.py validate
+	python .ci-scripts/changelog.py validate
 
 test:
-	uv run python antithesis-debug/assets/process-logs.py --test
-	uv run python antithesis-query-logs/assets/build-url.py --test
+	pwsh -NoProfile -File scripts/verify-examples.ps1
 
 validate-links:
 	lychee --config lychee.toml .

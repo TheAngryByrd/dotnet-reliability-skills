@@ -1,15 +1,6 @@
 {
-  "name": "antithesis-skills",
-  "owner": {
-    "name": "Antithesis"
-  },
-  "metadata": {
-    "description": "Skills for using Antithesis"
-  },
-  "plugins": [
-    {
-      "name": "antithesis-skills",
-      "source": "./"
-    }
-  ]
+  "name": "dotnet-reliability-skills",
+  "owner": { "name": "TheAngryByrd" },
+  "metadata": { "description": "C# and F# reliability testing skills for .NET" },
+  "plugins": [{ "name": "dotnet-reliability-skills", "source": "./" }]
 }

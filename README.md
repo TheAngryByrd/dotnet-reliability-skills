@@ -1,248 +1,66 @@
-# antithesis-skills
-
-Enable AI agents to set up Antithesis, bootstrap your first Antithesis test, launch Antithesis runs, and triage the results.
-
-> Table of contents:  
-> **[Working with LLM agents](#working-with-llm-agents)** · **[Recommended workflow](#recommended-workflow)** · **[Starter prompts](#starter-prompts)** · **[Choosing a model](#choosing-a-model)** · **[Prerequisites](#prerequisites)** · **[Install](#install)**
-
-## Skills overview
-
-`antithesis-documentation` is a foundational skill that enables agents to work with [our docs](https://antithesis.com/docs/) more efficiently. It's used by the research, setup, and workload skills. You can also use it to ask questions about how to use Antithesis.
-
-`antithesis-research`, `antithesis-setup`, and `antithesis-workload` work together to bootstrap a new system into Antithesis. Together, they will:
-
-- Analyze your system to provide a basic catalog of relevant [reliability properties](https://antithesis.com/docs/resources/reliability_glossary/).
-- Provide a suggested system topology for testing.
-- Handle your [initial deployment to Antithesis](https://antithesis.com/docs/getting_started/setup/).
-- Create a basic [test template](https://antithesis.com/docs/test_templates/) to validate properties in the catalog.
-
-**`antithesis-research` produces planning artifacts that you should review carefully.**
-
-> [!IMPORTANT]
-> `antithesis-research` is thorough by design. It fans out across sub-agents to study your system from several angles — reading source, comments, docs, commit history, and issues — then runs multiple evaluation passes over the properties it discovers. That depth is what makes the artifacts valuable, but it also means the run is not quick: on most codebases, expect it to work for > _30 minutes to an hour_* and to use a meaningful amount of tokens along the way.
-
-`antithesis-setup-k8s` enables agents to adapt Kubernetes manifests to run inside Antithesis. Given Kubernetes manifests in any form (helm charts, kustomize, raw YAML), the skill drives an interview-based workflow to adapt, convert, and validate manifests to work in Antithesis. This skill is still in development and does not provide all the same tools as `antithesis-setup`, specifically regarding instrumentation and SDK usage.
-
-`antithesis-triage` enables agents to parse and analyze the results of your Antithesis test runs.
-
-`antithesis-debug` enables agents to interactively debug Antithesis test runs using the [multiverse debugger](https://antithesis.com/docs/multiverse_debugging/) — inspecting container filesystems and runtime state, running shell commands, and extracting evidence from inside the Antithesis environment.
-
-`antithesis-query-logs` enables agents to search across all timelines in an Antithesis test run to find events, correlate property failures, and answer temporal questions about ordering and causation — e.g., cascade elimination, fault correlation, and root cause hypothesis testing.
-
-`antithesis-agent-browser` is a helper skill that handles interactive browser authentication to your Antithesis tenant and reads Antithesis web pages. Other skills (e.g. `antithesis-debug`, `antithesis-query-logs`) delegate to it when they need authenticated web access; you usually won't invoke it directly.
-
-`antithesis-review-inputs` reviews a workload's input generation for state space exploration — how well it uses randomness to drive the system under test into diverse regions of behavior. Useful when a workload isn't finding bugs and you want to understand whether its input generation is limiting what Antithesis can explore, or as a periodic health check on existing workloads.
-
-`antithesis-launch` enables agents to build the harness, run `snouty validate`, and submit `snouty launch` with sensible metadata once the harness is ready.
-
-`antithesis-mutation-testing` validates that your property catalog can actually catch bugs. A property that passes every run tells you nothing bad was observed — not that the property would have noticed. This skill injects one realistic bug per property, runs it, and confirms the property fires, then diagnoses each survivor as a bad mutant, a bad assertion, a workload gap, or a property that can't be falsified at all. Run it once the harness is built and your baseline run is green.
-
-`antithesis-feature-workload` is a focused entry point for testing a specific feature with Antithesis. Bring a feature — done or still in development — and this skill analyzes it, discovers testable properties, and builds a self-driving workload that runs locally and in Antithesis. For in-development features, the workload includes TDD-style stubs that go green as code lands. Unlike the broad research → setup → workload pipeline, this skill goes straight from feature analysis to a targeted workload.
-
-`antithesis-skills-feedback` helps you file bug reports against these skills by opening a pre-filled GitHub issue.
-
-> [!NOTE]
-> These skills are under active development. LLMs are inherently non-deterministic, so they may not work perfectly with your AI. Please do file issues and submit PRs as you come across ways to improve them.
-
-## Working with LLM agents
-
-These skills run inside an agent like Claude Code or Codex. Using them well means knowing how to work with the agent itself, not just the skills.
-
-If you're new to agentic tools, or you've been using them for a while and want to dig deeper, read [Getting Started with Antithesis Skills](getting-started-documentation/). It's a companion guide covering mental model, day-to-day working patterns, context and memory, building up your harness, and recognizing failure modes.
-
-## Recommended workflow
-
-<p align="center">
-  <img src="assets/skills-flowchart.png" alt="Antithesis skills workflow" width=600 />
-</p>
-
-We recommend that you run `antithesis-research`, `antithesis-setup`, and `antithesis-workload` in order and in separate fresh contexts. After running each skill review all of the changes made so far, and iterate on them before continuing to the next skill.
-
-If your system runs on Kubernetes, run `antithesis-setup-k8s` instead of `antithesis-setup` to help shape your Kubernetes manifests and kick off an Antithesis test that uses Kubernetes as the container orchestrator. This skill is currently in development and does not provide the same experience as `antithesis-setup` involving instrumentation and SDK usage.
-
-Once the harness is in place, use `antithesis-launch` to run `docker compose build`, `snouty validate`, and `snouty launch` in the right order. We recommend running this after the setup and workload skills to ensure everything is working well.
-
-Once a baseline run comes back green, `antithesis-mutation-testing` checks that your properties can actually fail — a green run proves nothing was observed, not that anything would have been noticed. It spends real run budget, so it asks for a ceiling up front.
-
-Don't hesitate to run short 15-30 minute Antithesis test runs as smoke tests to ensure that the harness is working as expected.
-
-## Starter prompts
-
-To get the most out of the skills, we recommend that your prompts simply provide the required information for the skill.
-
-Here are some example starter prompts.
-
-> [!NOTE]
-> There are many ways to invoke a skill, in the examples below, it's invoked with a /skill-name.
-
-### antithesis-research
-
-```
-/antithesis-research Research my codebase at /path/to/codebase and prepare a plan to test it with Antithesis.
-```
-
-This skill outputs the following research materials, relative to the project directory:
-
-- `antithesis/scratchbook/sut-analysis.md` captures architecture, state, concurrency, and failure-prone areas.
-- `antithesis/scratchbook/existing-assertions.md` lists any Antithesis SDK assertions already present in the codebase.
-- `antithesis/scratchbook/property-catalog.md` lists concrete, testable properties with priorities.
-- `antithesis/scratchbook/deployment-topology.md` describes the minimal useful container topology.
-- `antithesis/scratchbook/properties/{slug}.md` per-property evidence files capturing the reasoning, code paths, and key observations behind each property.
-- `antithesis/scratchbook/property-relationships.md` maps suspected clusters and connections between properties.
-- `antithesis/scratchbook/evaluation/synthesis.md` records categorized evaluation findings and actions taken.
-- `antithesis/scratchbook/evaluation/{lens}.md` one per evaluation lens used during property evaluation.
-
-### antithesis-setup (for docker-compose)
-
-```
-/antithesis-setup Review the files in @antithesis/scratchbook/, build the things needed to begin testing with Antithesis, and validate the setup locally.
-```
-
-This skill initializes an `antithesis/` directory, relative to the project, and adds all newly created setup files there.
-
-Here's an example:
-
-- `antithesis/Dockerfile` performs a multi-stage build of the SUT.
-- `antithesis/config/docker-compose.yaml` orchestrates the SUT.
-- `antithesis/setup-complete.sh` emits the `setup_complete` lifecycle event.
-- `antithesis/AGENTS.md` documents the `antithesis/` directory.
-
-### antithesis-setup-k8s
-
-```
-/antithesis-setup-k8s Review my Kubernetes manifests at /path/to/manifests. The system that I'd like to put under test is <description of core system under test>. Build a set of minimized Kubernetes manifests to get my application running in Antithesis, test them out, and kick off a test via antithesis-launch.
-```
-
-This skill initializes an `antithesis/` directory and creates manifests there along with some other helpful tools to understand the AI's thinking.
-
-Here's an example:
-
-- `antithesis/config/manifests` are the manifests that will be run in Antithesis
-- `antithesis/scratchbook/k8s-minimization/working.md` will contain the progress of the AI during the skill. Refer to this to understand the decisions that the AI made.
-
-### antithesis-workload
-
-```
-/antithesis-workload Review the plan for testing with Antithesis in @antithesis/scratchbook/property-catalog.md and implement a workload for a single property to start.
-```
-
-This skill implements Antithesis workloads and places all the test commands and supporting files under `antithesis/test/`, adds assertions to carefully chosen locations in the SUT.
-
-### antithesis-feature-workload
-
-```
-/antithesis-feature-workload I'm building a new batch processing feature in src/batch/. Help me design an Antithesis workload to test it.
-```
-
-```
-/antithesis-feature-workload We just shipped the new replication feature. Build a workload that exercises it and checks its invariants.
-```
-
-This skill analyzes the feature, discovers testable properties, and builds a self-driving workload with dual-mode assertions (SDK in Antithesis, local checks outside). Outputs go to `antithesis/feature-workloads/<feature-slug>/`.
-
-### antithesis-launch
-
-```
-/antithesis-launch Launch an Antithesis run from this repo for 30 minutes.
-```
-
-This skill discovers the Antithesis config, builds the harness, validates it with `snouty validate`, and only submits `snouty launch` if validation succeeds.
-
-### antithesis-mutation-testing
-
-```
-/antithesis-mutation-testing My baseline run is green. Validate the properties in @antithesis/scratchbook/property-catalog.md by mutation testing them.
-```
-
-This skill asks how autonomous you want it to be and how many runs it may spend, then works under `antithesis/scratchbook/mutation-testing/` — one patch per mutant, per-mutant evidence, a resumable `status.md`, and a `report.md` giving every property a verdict and the run that proves it. Each property's evidence file gains a `## Falsification` section recording what the sweep established. Your working tree is left unmutated.
-
-If there is no property catalog — the scratchbook was never written, or was deleted after the harness was built — the skill reconstructs one from the Antithesis assertions in your code plus the baseline run, and says so in the report. A reconstructed catalog validates the assertions you already have; run `antithesis-research` for the properties nobody has asserted yet.
-
-> [!IMPORTANT]
-> Mutation testing requires launching and analyzing many test runs, so make sure to be prepared of the cost in terms of compute, tokens, and time. The skill requires building an image and launching an Antithesis run per property, plus a baseline run, plus a full re-sweep after each round of fixes. It confirms the maximum run budget as well as the maximum number of concurrent runs allowed with you before submitting any job, and it launches every mutant run as `--ephemeral` under a dedicated `--source` so the deliberate failures never enter your real property history.
-
-### antithesis-review-inputs
-
-```
-/antithesis-review-inputs Review the workload in this repo.
-```
-
-This skill reads the workload code and produces a report of findings — structural patterns in input generation that limit what Antithesis can explore. It does not modify the workload or suggest specific code changes.
-
-## Compatibility
-
-**Platform**: macOS or Linux.
-
-**AI agent**: Tested with [Claude Code](https://code.claude.com/docs) and [OpenAI Codex](https://learn.chatgpt.com/docs/codex/cli). These skills work best with agents that can spawn sub-agents for self-review. Other agents that support skills may also work.
-
-## Choosing a model
-
-These skills work well with mid-tier models. They were designed and tested with Claude Opus 4.6, and models at that level — older Sonnets, or similar from other providers — are a good starting point. If you think a particular skill isn't performing well enough, try a more capable model for that skill before upgrading across the board.
-
-Some skills are heavy on input tokens — `antithesis-research` in particular. Using a frontier model where a mid-tier one performs just as well has a real impact on spend and quota usage for minimal to no gain.
-
-## Prerequisites
-
-You'll need an AI agent, npm, Docker Compose v2, a container engine (Docker or Podman), and the Snouty CLI. See [PREREQUISITES.md](PREREQUISITES.md) for the full list and platform-specific installation instructions.
-
-## Permissions
-
-These skills invoke external tools (Docker Compose, Docker, Snouty, agent-browser) that your AI agent may prompt you to approve. The skills themselves do not configure permissions — that's up to you based on your security preferences.
-
-Here are the tools each skill may invoke, so you can pre-approve them if you prefer fewer interruptions:
-
-| Skill                      | Tools used                                                     |
-| -------------------------- | ------------------------------------------------------------ |
-| `antithesis-research`      | No explicit external tools                                     |
-| `antithesis-setup`         | `docker compose`/`docker-compose`, `docker`/`podman`, `snouty` |
-| `antithesis-setup-k8s`     | `docker`/`podman`, `snouty`                                    |
-| `antithesis-workload`      | `snouty`                                                       |
-| `antithesis-feature-workload` | `docker compose`/`docker-compose`, `docker`/`podman`, `snouty` |
-| `antithesis-launch`        | `docker compose`/`docker-compose`, `docker`/`podman`, `snouty` |
-| `antithesis-triage`        | `snouty`, `jq`                                                 |
-| `antithesis-debug`         | `agent-browser`, `jq`                                          |
-| `antithesis-query-logs`    | `snouty`, `agent-browser`, `jq`                                |
-| `antithesis-agent-browser` | `agent-browser`, `jq`                                          |
-| `antithesis-review-inputs` | No explicit external tools                                     |
-| `antithesis-documentation` | `snouty docs`                                                  |
-| `antithesis-mutation-testing` | `docker-compose`, `snouty`, `jq`, `git`, `rsync`            |
+# .NET reliability skills
+
+Agent skills for C# and F# property testing, integration workloads, mutation testing, and runtime failure analysis.
+
+The skills use existing .NET libraries and repository conventions. They do not require a hosted testing service.
+
+## Skills
+
+| Skill | Purpose |
+| --- | --- |
+| [dotnet-review-inputs](dotnet-review-inputs/SKILL.md) | Review generator distributions, shrinking, state, and timing |
+| [dotnet-reliability-research](dotnet-reliability-research/SKILL.md) | Discover concrete properties and select suitable test methods |
+| [dotnet-feature-workload](dotnet-feature-workload/SKILL.md) | Build a workload for one feature |
+| [dotnet-workload](dotnet-workload/SKILL.md) | Implement a property from an existing catalog |
+| [dotnet-mutation-testing](dotnet-mutation-testing/SKILL.md) | Check whether realistic defects are detected |
+| [dotnet-test-setup](dotnet-test-setup/SKILL.md) | Prepare local hosts and real dependencies |
+| [dotnet-test-setup-k8s](dotnet-test-setup-k8s/SKILL.md) | Prepare a scoped Kubernetes test environment |
+| [dotnet-test-triage](dotnet-test-triage/SKILL.md) | Investigate failures using runtime evidence |
+| [dotnet-library-documentation](dotnet-library-documentation/SKILL.md) | Verify version-specific APIs and runtime contracts |
+| [dotnet-skills-feedback](dotnet-skills-feedback/SKILL.md) | Prepare a reviewable issue for this repository |
 
 ## Install
 
-### npx skills installer
-
-The recommended way to install our skills in all of your AI agents is via the `npx skills` installer:
-
-```bash
-npx skills add antithesishq/antithesis-skills
+```sh
+npx skills add TheAngryByrd/dotnet-reliability-skills
 ```
 
-The installer presents an interactive menu. Choose the following options:
+Select the skills and agents you need. Restart the agent if it does not discover new skills automatically.
 
-1. **Skills** — select the skills you need:
-   - `antithesis-documentation`
-   - `antithesis-research`
-   - `antithesis-setup`
-   - `antithesis-setup-k8s`
-   - `antithesis-triage`
-   - `antithesis-workload`
-   - `antithesis-debug`
-   - `antithesis-query-logs`
-   - `antithesis-agent-browser`
-   - `antithesis-launch`
-   - `antithesis-mutation-testing`
-   - `antithesis-review-inputs`
-   - `antithesis-feature-workload`
-   - `antithesis-skills-feedback`
-2. **Pick agents** - make sure to select **Claude Code** if you want to use our skills with Claude, as it's not enabled by default.
-3. **Install scope** — choose **global**, not project.
-4. **Install method** — choose **symlink**.
-5. **Install find-skills skill** — choose **No**.
+Each skill is self-contained. Installation does not install .NET packages, change test frameworks, or provision services.
 
-Restart any open agent sessions after installing so the new skills are discovered.
+## Use
 
-To update: `npx skills update`. To uninstall: `npx skills remove` and select the `antithesis` prefixed skills.
+```text
+/dotnet-reliability-research Identify reliability properties in src/ and select suitable tests.
+/dotnet-review-inputs Review the FsCheck generators in tests/ for unexplored behavior.
+/dotnet-feature-workload Exercise cancellation and capacity limits in our new queue feature.
+/dotnet-mutation-testing Check whether the F# parser properties detect realistic boundary defects.
+/dotnet-test-triage Investigate this failed run using its logs and minimized counterexample.
+```
 
-## Contributing
+Start with a focused feature workload, or research the system before building a broader catalog. Review findings before adopting new dependencies or infrastructure.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and validation commands.
+## Library and runtime choices
+
+- Reuse the repository's test framework, SDK, and package versions.
+- Use FsCheck or Hedgehog for generated cases and shrinking when useful.
+- Use `TimeProvider` and `FakeTimeProvider` for code that accepts an injected clock.
+- Use Testcontainers or an existing Aspire/Compose environment for real dependencies.
+- Use Stryker.NET where the source language, project, and runner are supported. Use isolated manual mutations otherwise.
+- Consider Coyote only after checking support for the actual execution path.
+
+Seeded input generation does not reproduce thread scheduling or external systems. A timeout does not prove cancellation. A model-only test does not establish production behavior.
+
+## Verification
+
+```sh
+python scripts/validate-skills.py
+pwsh -NoProfile -File scripts/verify-examples.ps1
+```
+
+The executable [C# and F# examples](dotnet-feature-workload/assets/examples/README.md) check FsCheck APIs, timer boundaries, and wait-timeout behavior. Their deliberate boundary defects must fail.
+
+These checks validate structure and examples. They do not certify every library integration or guarantee an agent's decisions.
+
+See [prerequisites](PREREQUISITES.md), [contributing](CONTRIBUTING.md), and [license notices](NOTICE).

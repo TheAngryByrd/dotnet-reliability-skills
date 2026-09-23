@@ -1,21 +1,11 @@
 {
-  "name": "antithesis-skills",
+  "name": "dotnet-reliability-skills",
   "version": "0.1.0",
-  "description": "Skills for using Antithesis",
-  "author": {
-    "name": "Antithesis",
-    "url": "https://antithesis.com"
-  },
-  "homepage": "https://github.com/antithesishq/antithesis-skills",
-  "repository": "https://github.com/antithesishq/antithesis-skills",
+  "description": "C# and F# reliability testing skills for .NET",
+  "author": { "name": "TheAngryByrd" },
+  "homepage": "https://github.com/TheAngryByrd/dotnet-reliability-skills",
+  "repository": "https://github.com/TheAngryByrd/dotnet-reliability-skills",
   "license": "Apache-2.0",
-  "keywords": [
-    "antithesis",
-    "testing",
-    "reliability",
-    "workload",
-    "triage",
-    "simulation"
-  ],
+  "keywords": ["dotnet", "csharp", "fsharp", "testing", "reliability"],
   "skills": "./"
 }

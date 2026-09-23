@@ -1,7 +1,7 @@
 [project]
-name = "antithesis-skills"
+name = "dotnet-reliability-skills"
 version = "0.1.0"
-description = "AI skills for Antithesis workflows."
+description = "Development tooling for .NET reliability skills."
 requires-python = ">=3.11"
 dependencies = [
     "tiktoken==0.12.0",
