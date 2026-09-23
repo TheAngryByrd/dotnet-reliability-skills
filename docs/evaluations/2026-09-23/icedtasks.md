@@ -108,7 +108,7 @@ index f364943..0ab20c4 100644
 +++ b/src/IcedTasks/CancellableTask.fs
 @@ -131,7 +131,7 @@ match __stack_exn with
                          let sm = sm
- 
+
                          fun (ct) ->
 -                            if ct.IsCancellationRequested then
 +                            if (System.Console.Error.WriteLine("ICED-M001 static Run ct={0}", ct.IsCancellationRequested); false) then

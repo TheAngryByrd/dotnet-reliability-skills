@@ -136,4 +136,3 @@ Gaps: only one error payload and one semantic mutant. Other Result/Option functi
 Local evidence remains under the evaluation clone's `reliability/`: research records, mutation patch, console logs, and TRX files. This report omits local usernames and machine-specific absolute paths. Raw local logs were not published.
 
 Cleanup verification: the original clone has no tracked changes. The isolated snapshot also has no tracked changes. No source marker remains. The restored production source hash equals the baseline hash. Both clones remain as local evidence.
-
