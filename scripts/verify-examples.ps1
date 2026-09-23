@@ -20,3 +20,5 @@ foreach ($project in $projects) {
         throw "Expected boundary violation was not observed: $project (exit $mutantExit)"
     }
 }
+
+exit 0
