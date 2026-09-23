@@ -5,3 +5,4 @@ extend-ignore-re = ['"[A-Za-z0-9+/=]{20,}"']
 
 [default.extend-words]
 mutatable = "mutatable"
+Paket = "Paket"
