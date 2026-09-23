@@ -12,6 +12,12 @@ Use an isolated clone pinned to a full source commit. Preserve the target reposi
 
 Give the evaluating agent a realistic request, the relevant skills, and the repository. Do not supply the expected conclusion or a suspected defect.
 
+For research evaluation, preserve the user's research scope in the evaluator assignment. Record that assignment in the report.
+
+Check the resulting subsystem inventory against the repository's projects, entry points, and state owners. Require source-backed inspection and property records across the major in-scope areas. Naming areas without inspecting them does not establish coverage.
+
+Assess research breadth separately from executable test depth. Reject a focused test investigation as evidence of repository-wide research. Publish the full research artifacts and state any incomplete areas.
+
 Apply only the skills needed for that request. Adding containers or randomized tests to every repository would not demonstrate correct selection.
 
 Keep any generated tests and mutants in the evaluation copy. Do not change the user's checkout or publish changes to the evaluated repository.
