@@ -41,6 +41,8 @@ Each skill is self-contained. Installation does not install .NET packages, chang
 
 Start with a focused feature workload, or research the system before building a broader catalog. Review findings before adopting new dependencies or infrastructure.
 
+See the [usage guide](docs/usage.md) for skill selection, C#/F# library choices, and the limits of runtime observations.
+
 ## Library and runtime choices
 
 - Reuse the repository's test framework, SDK, and package versions.
@@ -62,5 +64,9 @@ pwsh -NoProfile -File scripts/verify-examples.ps1
 The executable [C# and F# examples](dotnet-feature-workload/assets/examples/README.md) check FsCheck APIs, timer boundaries, and wait-timeout behavior. Their deliberate boundary defects must fail.
 
 These checks validate structure and examples. They do not certify every library integration or guarantee an agent's decisions.
+
+[Repository evaluations](docs/evaluations/README.md) apply the skills to real source with pinned revisions, executable checks, and explicit limits.
+
+The package contains only the ten .NET skills listed above. It has no hosted-service launch, browser authentication, remote debugger, or timeline-query skill.
 
 See [prerequisites](PREREQUISITES.md), [contributing](CONTRIBUTING.md), and [license notices](NOTICE).

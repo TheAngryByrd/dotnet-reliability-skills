@@ -13,6 +13,10 @@ pwsh -NoProfile -File scripts/verify-examples.ps1
 
 Use realistic tasks to review agent behavior. Structural validation cannot establish that instructions select the correct tool or interpret a failure correctly.
 
+Follow the [repository evaluation method](docs/evaluations/README.md) for substantial skill changes. Record exact source and skill revisions and retain reproducible workload or mutant patches.
+
+Keep evaluated repositories isolated. Do not publish their source or build output in this package. Include only the evidence and small patches needed to repeat the task.
+
 ## Writing and compatibility
 
 Write direct instructions. Include source-language, package-version, test-runner, and runtime limits where they affect decisions.

@@ -16,6 +16,8 @@ Reuse installed packages and their APIs. FsCheck 2 and 3 have different namespac
 
 Record seed, size, operation sequence, minimized counterexample, package versions, runtime, and configuration. Prefer the library's replay mechanism over a new seed convention.
 
+Verify the executed case count after changing replay settings. In FsCheck 3.4.0, `Replay.Size = Some size` selects one case, even when `MaxTest` is larger. Use `Size = None` for a seeded campaign. See the [versioned runner source](https://github.com/fscheck/FsCheck/blob/4bcc1d8f172f649f806d124827c7b56e6a8e3980/src/FsCheck/Runner.fs#L422-L431).
+
 Seeded generators reproduce inputs under compatible versions. They do not fix task scheduling, process scheduling, filesystem order, network responses, or external clocks.
 
 Do not promise replay from `Random.Shared`. Even an explicitly seeded `Random` requires a stable draw order and compatible implementation.

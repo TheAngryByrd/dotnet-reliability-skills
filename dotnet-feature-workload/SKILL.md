@@ -1,6 +1,6 @@
 ---
 name: dotnet-feature-workload
-description: Build a focused C# or F# property-based workload for one feature using existing .NET test libraries. Use to exercise invariants, reach conditions, async behavior, and bounded progress locally.
+description: Build or reuse a focused C# or F# test workload for one feature using existing .NET test libraries. Use to exercise invariants, reach conditions, async behavior, and bounded progress locally.
 license: Apache-2.0
 ---
 
@@ -13,8 +13,8 @@ Start with a completed or developing feature. Produce executable checks that cal
 1. Read the feature, nearby tests, project files, package versions, and test commands. Preserve the repository's framework and SDK.
 2. Identify concrete invariants, input boundaries, failure outcomes, and important reachable states.
 3. Separate implemented behavior from planned behavior. Do not disguise an unimplemented requirement as a passing or silently skipped test.
-4. Read [runtime semantics](references/runtime.md). Select FsCheck, Hedgehog, or an existing custom generator based on the repository.
-5. Generate legal domain values through supported constructors. Generate invalid raw input separately to test parsing failures.
+4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version.
+5. Construct legal domain values through supported constructors. Keep invalid raw input separate to test parsing failures.
 6. Build operations, independent expected results, and explicit reach observations. Ensure the workload invokes production code.
 7. Use real external dependencies where their behavior is part of the property. Preserve the existing host or container setup.
 8. Run a bounded local workload. Record executed cases, rejected cases, reached states, failures, and replay data.
