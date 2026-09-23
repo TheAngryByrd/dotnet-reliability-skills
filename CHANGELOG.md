@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. Entries
 are grouped by date (UTC) with newest first.
 
+## 2026-09-23
+
+- fix: clarify that test templates do not require a driver ([PR #204](https://github.com/antithesishq/antithesis-skills/pull/204))
+
 ## 2026-09-22
 
 - feat: add antithesis-feature-workload skill ([PR #198](https://github.com/antithesishq/antithesis-skills/pull/198))
