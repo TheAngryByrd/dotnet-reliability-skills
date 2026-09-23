@@ -45,6 +45,8 @@ FsCheck major versions have different APIs. F# `Async`, `Task`, and `ValueTask` 
 6. Run the focused workload and preserve the command, result, and replay evidence.
 7. Investigate unexercised or failed checks before changing the guarantee.
 
+For repository-wide requests, research first maps the major subsystems and their contracts. Select a bounded execution sample only after recording research coverage and gaps.
+
 For a larger effort, research produces the catalog and workload skills implement its entries. Setup is needed only when the property requires additional infrastructure.
 
 ## Example requests

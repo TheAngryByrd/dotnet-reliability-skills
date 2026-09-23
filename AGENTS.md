@@ -17,7 +17,9 @@ Use existing checks:
 
 Run examples when changing their code, package references, or runtime instructions. Verify both passing execution and the intended defect detection.
 
-Use focused behavioral evaluation for substantial skill changes. Do not assert natural-language wording in tests.
+Use behavioral evaluation that matches the requested scope for substantial skill changes. Do not assert natural-language wording in tests.
+
+For repository-wide research, preserve that scope in evaluator assignments. Audit the subsystem inventory against projects, entry points, and state owners before accepting the result. A focused test run cannot establish repository-wide research coverage. Retain the full research artifacts and report incomplete inspection explicitly.
 
 Preserve Apache-2.0 attribution in LICENSE and NOTICE files. Record material adaptation notices there rather than in skill instructions.
 

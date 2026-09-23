@@ -1,6 +1,6 @@
 # .NET repository evaluations: 2026-09-23
 
-Four independent agents applied the skills to isolated public repositories. Each used source revision `0870cc11d332d6c7f027b3b232d9b6dcf5bf0671` of this skill package.
+The initial four independent agents applied the skills to isolated public repositories. Each used source revision `0870cc11d332d6c7f027b3b232d9b6dcf5bf0671` of this skill package.
 
 The evaluations preserved each repository's SDK selection, packages, language, framework, and runner. They ran focused checks, not full repository suites.
 
@@ -14,6 +14,16 @@ The evaluations preserved each repository's SDK selection, packages, language, f
 | [FsAutoComplete](fsautocomplete.md) | Research and test script-option behavior: 3 passed, 2 skipped | Duplicate-open behavior only; eviction and true reopen behavior were not established |
 
 Each linked report contains the full target revision, commands, execution evidence, and limits. Inline mutation patches are retained where applicable.
+
+## Repository-wide research rerun
+
+The initial FsAutoComplete evaluation was a focused script-options investigation. It did not satisfy repository-wide research coverage.
+
+The [research rerun](fsautocomplete-research/system.md) uses skill revision `0e4e2df532eaff581ac2d931a45bcf3f1294a770` against the same target revision. Full artifacts include the [coverage matrix](fsautocomplete-research/coverage.md), [property catalog](fsautocomplete-research/properties.md), and [evaluation](fsautocomplete-research/evaluation.md).
+
+The [acceptance audit](fsautocomplete-research/acceptance.md) checks the 31-property catalog against an independent inventory.
+
+Research coverage is assessed separately from test execution. The initial test outcomes above are not results for the new catalog.
 
 ## Skill coverage
 

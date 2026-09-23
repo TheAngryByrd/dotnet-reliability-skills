@@ -1,9 +1,11 @@
-# FsAutoComplete reliability skill evaluation
+# FsAutoComplete focused script-options evaluation
 
 Date: 2026-09-23.
 Skill revision: `0870cc11d332d6c7f027b3b232d9b6dcf5bf0671`.
 Target: <https://github.com/ionide/FsAutoComplete>.
 Target default-branch revision: `85886b187b87834e0fe0a410cb13332d7f9757ca`.
+
+This evaluation covers one script-options behavior. It does not establish repository-wide research coverage. See the [repository-wide research rerun](fsautocomplete-research/system.md).
 
 ## Result
 

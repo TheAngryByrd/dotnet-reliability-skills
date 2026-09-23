@@ -6,6 +6,8 @@ Repository evaluations test whether the skills select suitable methods and produ
 
 The [2026-09-23 evaluation](2026-09-23/README.md) covers Fantomas, IcedTasks, FsToolkit.ErrorHandling, and FsAutoComplete.
 
+The [FsAutoComplete research rerun](2026-09-23/fsautocomplete-research/system.md) applies the corrected repository-wide scope requirements. It retains the full research artifacts.
+
 ## Method
 
 Use an isolated clone pinned to a full source commit. Preserve the target repository's SDK, package versions, language, test framework, and runner.
