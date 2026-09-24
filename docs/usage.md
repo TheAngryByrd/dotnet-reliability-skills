@@ -13,6 +13,7 @@ These skills work with C# and F# source, existing test projects, and .NET runtim
 | Check whether tests notice realistic defects | `dotnet-mutation-testing` | Baseline, isolated mutants, and evidence for each verdict |
 | Start the dependencies needed by integration tests | `dotnet-test-setup` | A verified local environment with bounded cleanup |
 | Test behavior that requires Kubernetes | `dotnet-test-setup-k8s` | A scoped deployment that preserves the tested cluster behavior |
+| Review test value or plan suite cleanup | `dotnet-test-audit` | Evidence for retained, repaired, consolidated, removed, and unresolved checks |
 | Explain a failed, hung, or unexercised test | `dotnet-test-triage` | Runtime evidence, a failure classification, and unresolved alternatives |
 | Check an API or runtime guarantee | `dotnet-library-documentation` | An answer matched to the installed version |
 | Report a problem with these skills | `dotnet-skills-feedback` | A draft issue for user review |
@@ -60,6 +61,8 @@ For a larger effort, research produces the catalog and workload skills implement
 
 /dotnet-mutation-testing Establish a baseline and test one realistic F# source mutant in an isolated copy. Keep my checkout unchanged.
 
+/dotnet-test-audit Audit all tests in this subsystem. Keep discovery read-only and identify contracts that each proposed removal must preserve.
+
 /dotnet-test-triage Explain this failed test using its result file, exception, and operation history. Distinguish product failure from harness failure.
 ```
 
@@ -76,6 +79,6 @@ Preserve source revision, relevant configuration, SDK/runtime, package versions,
 
 ## Scope of the package
 
-The package contains ten independently installable skills. It does not include hosted-service launchers, browser authentication helpers, remote debugger drivers, or timeline-query clients.
+The package contains eleven independently installable skills. It does not include hosted-service launchers, browser authentication helpers, remote debugger drivers, or timeline-query clients.
 
 License and attribution information is in `LICENSE` and `NOTICE`. Operational instructions do not require that history.

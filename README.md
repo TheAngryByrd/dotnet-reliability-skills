@@ -15,6 +15,7 @@ The skills use existing .NET libraries and repository conventions. They do not r
 | [dotnet-mutation-testing](dotnet-mutation-testing/SKILL.md) | Check whether realistic defects are detected |
 | [dotnet-test-setup](dotnet-test-setup/SKILL.md) | Prepare local hosts and real dependencies |
 | [dotnet-test-setup-k8s](dotnet-test-setup-k8s/SKILL.md) | Prepare a scoped Kubernetes test environment |
+| [dotnet-test-audit](dotnet-test-audit/SKILL.md) | Audit test value and preserve contracts during cleanup |
 | [dotnet-test-triage](dotnet-test-triage/SKILL.md) | Investigate failures using runtime evidence |
 | [dotnet-library-documentation](dotnet-library-documentation/SKILL.md) | Verify version-specific APIs and runtime contracts |
 | [dotnet-skills-feedback](dotnet-skills-feedback/SKILL.md) | Prepare a reviewable issue for this repository |
@@ -36,6 +37,7 @@ Each skill is self-contained. Installation does not install .NET packages, chang
 /dotnet-review-inputs Review the FsCheck generators in tests/ for unexplored behavior.
 /dotnet-feature-workload Exercise cancellation and capacity limits in our new queue feature.
 /dotnet-mutation-testing Check whether the F# parser properties detect realistic boundary defects.
+/dotnet-test-audit Review these C# and F# suites for redundant or ineffective checks.
 /dotnet-test-triage Investigate this failed run using its logs and minimized counterexample.
 ```
 
@@ -67,6 +69,6 @@ These checks validate structure and examples. They do not certify every library 
 
 [Repository evaluations](docs/evaluations/README.md) apply the skills to real source with pinned revisions, executable checks, and explicit limits.
 
-The package contains only the ten .NET skills listed above. It has no hosted-service launch, browser authentication, remote debugger, or timeline-query skill.
+The package contains only the eleven .NET skills listed above. It has no hosted-service launch, browser authentication, remote debugger, or timeline-query skill.
 
 See [prerequisites](PREREQUISITES.md), [contributing](CONTRIBUTING.md), and [license notices](NOTICE).
