@@ -10,5 +10,8 @@ documentation, and validation workflow for C#/F# libraries and .NET runtime
 semantics. Hosted-platform skills and their helpers are excluded. New .NET
 examples and verification tooling are included.
 
+The evals/ harness adapts the eval runner design from TheAngryByrd/fsharp-skills
+(https://github.com/TheAngryByrd/fsharp-skills/tree/master/evals).
+
 Original versions and attribution remain available in Git history.
 This fork is not an Antithesis product or an endorsement by Antithesis.

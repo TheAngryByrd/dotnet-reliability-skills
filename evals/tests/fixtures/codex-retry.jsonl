@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"t"}
+{"type":"turn.started"}
+{"type":"error","message":"Reconnecting... 1/5 (stream disconnected before completion)"}
+{"type":"item.completed","item":{"id":"i1","type":"agent_message","text":"Done."}}
+{"type":"turn.completed","usage":{"input_tokens":5,"cached_input_tokens":0,"output_tokens":1}}

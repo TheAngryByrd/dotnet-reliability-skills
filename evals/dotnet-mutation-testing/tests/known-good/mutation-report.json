@@ -1,0 +1,9 @@
+{
+  "baseline": { "command": "dotnet test tests/FsToolkit.ErrorHandling.Tests/FsToolkit.ErrorHandling.Tests.fsproj -f net9.0 -c Release", "passed": 1486, "failed": 0 },
+  "mutants": [
+    { "id": "M1", "detected": true, "failingTests": ["All Tests.Result Tests.requireNotEmpty Tests.requireNotEmpty happy path"], "explanation": "A one-element sequence now returns Error." },
+    { "id": "M2", "detected": true, "failingTests": ["requireHead returns the first of many"], "explanation": "The uncommitted test uses three elements, so the last element differs from the first." },
+    { "id": "M3", "detected": false, "failingTests": [], "explanation": "The mutant does not compile (FS0064). It is an invalid mutant, not a test detection." },
+    { "id": "M4", "detected": false, "failingTests": [], "explanation": "Seq.length xs = 0 is equivalent to Seq.isEmpty for finite sequences." }
+  ]
+}

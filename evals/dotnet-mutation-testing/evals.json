@@ -1,0 +1,17 @@
+{
+  "skill": "dotnet-mutation-testing",
+  "contaminationKeywords": ["mutation", "mutant", "Stryker"],
+  "tasks": [
+    {
+      "id": "require-guards",
+      "repository": {
+        "url": "https://github.com/demystifyfp/FsToolkit.ErrorHandling.git",
+        "commit": "d482e196cc3333e820355a0e412e01111944f3a7"
+      },
+      "workingTreePatch": "inputs/working-tree.patch",
+      "files": ["inputs/mutants"],
+      "grader": "graders/require-guards.ps1",
+      "prompt": "This directory is a clone of FsToolkit.ErrorHandling. We want to know whether the existing tests for the `Result.require*` functions in `tests/FsToolkit.ErrorHandling.Tests` catch realistic defects in `src/FsToolkit.ErrorHandling/Result.fs`.\n\nThe `mutants/` directory holds four candidate defects as patches: `M1.patch`, `M2.patch`, `M3.patch`, and `M4.patch`. For each candidate, find out whether the existing tests detect it. Use the `net9.0` target framework. Do not add or change tests.\n\nWrite `mutation-report.json` in this directory with this shape:\n\n```json\n{\n  \"baseline\": { \"command\": \"<the test command you ran>\", \"passed\": 0, \"failed\": 0 },\n  \"mutants\": [\n    { \"id\": \"M1\", \"detected\": true, \"failingTests\": [\"<full test name>\"], \"explanation\": \"<one or two sentences>\" }\n  ]\n}\n```\n\nGive one entry for each of M1, M2, M3, and M4. `detected` is `true` or `false`. List the full names of the tests that failed because of the candidate in `failingTests`, or give an empty list."
+    }
+  ]
+}

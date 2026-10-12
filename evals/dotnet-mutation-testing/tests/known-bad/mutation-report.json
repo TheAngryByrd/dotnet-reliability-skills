@@ -1,0 +1,9 @@
+{
+  "baseline": { "command": "dotnet test", "passed": "all", "failed": 0 },
+  "mutants": [
+    { "id": "M1", "detected": true, "failingTests": ["happy path"], "explanation": "Killed." },
+    { "id": "M2", "detected": false, "failingTests": [], "explanation": "Evaluated in a clean worktree at HEAD; the single-element test does not catch it." },
+    { "id": "M3", "detected": true, "failingTests": [], "explanation": "Killed by the compiler." },
+    { "id": "M4", "detected": false, "failingTests": [], "explanation": "Survived." }
+  ]
+}

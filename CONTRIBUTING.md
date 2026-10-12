@@ -15,6 +15,8 @@ Use realistic tasks to review agent behavior. Structural validation cannot estab
 
 Follow the [repository evaluation method](docs/evaluations/README.md) for substantial skill changes. Record exact source and skill revisions and retain reproducible workload or mutant patches.
 
+Use the [eval harness](evals/README.md) to compare agent runs with and without a skill. The harness README describes how to run it and how to add a task.
+
 Keep evaluated repositories isolated. Do not publish their source or build output in this package. Include only the evidence and small patches needed to repeat the task.
 
 ## Writing and compatibility

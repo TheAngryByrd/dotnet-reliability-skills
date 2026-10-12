@@ -38,6 +38,9 @@ jobs:
       - name: Run tests
         run: make test
 
+      - name: Run eval harness tests
+        run: make test-evals
+
       - name: Check spelling
         uses: crate-ci/typos@v1.44.0
 
