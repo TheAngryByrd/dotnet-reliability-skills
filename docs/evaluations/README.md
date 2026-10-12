@@ -10,6 +10,8 @@ The [FsAutoComplete research rerun](2026-09-23/fsautocomplete-research/system.md
 
 The [2026-09-24 test-audit evaluation](2026-09-24-test-audit/README.md) checks read-only audit decisions against the C# and F# executable examples.
 
+The [2026-10-12 eval harness results](2026-10-12-eval-harness/README.md) compare agent runs with and without `dotnet-mutation-testing` and `dotnet-review-inputs`.
+
 ## Method
 
 Use an isolated clone pinned to a full source commit. Preserve the target repository's SDK, package versions, language, test framework, and runner.
