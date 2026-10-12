@@ -4,4 +4,5 @@ cache = true
 exclude = [
   '^https://raw\.githubusercontent\.com/dotnet/fsharp/\$using:hash/\$path$',
   '^https://www\.npmjs\.com/',
+  '^https://github\.com/owner/repo\.git$',
 ]
