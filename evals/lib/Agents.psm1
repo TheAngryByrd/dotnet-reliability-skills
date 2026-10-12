@@ -443,9 +443,14 @@ function Get-RunValue($Run, [string]$Name) {
     if ($Run.PSObject.Properties[$Name]) { $Run.$Name } else { $null }
 }
 
+function Format-Invariant([string]$Format, $Value) {
+    # Summaries must not depend on the machine culture.
+    [string]::Format([Globalization.CultureInfo]::InvariantCulture, $Format, $Value)
+}
+
 function Format-Mean([object[]]$Values) {
     $mean = Get-Mean $Values
-    if ($null -ne $mean) { '{0:n1}' -f $mean } else { '-' }
+    if ($null -ne $mean) { Format-Invariant '{0:n1}' $mean } else { '-' }
 }
 
 function Test-CountedRun($Run) {
@@ -491,11 +496,11 @@ function Write-Summary {
         $tok = Get-Mean ($r | ForEach-Object { if ($null -ne (Get-RunValue $_ 'inputTokens')) { $_.inputTokens + $_.outputTokens } })
         $cost = Get-Mean ($r | ForEach-Object { Get-RunValue $_ 'costUsd' })
         $lines += '| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} | {13} | {14} |' -f $r[0].target, $r[0].task, $r[0].mode, $r.Count,
-            $(if ($null -ne $rate) { '{0:p0}' -f $rate } else { '-' }),
+            $(if ($null -ne $rate) { '{0}%' -f [math]::Round($rate * 100, [MidpointRounding]::AwayFromZero) } else { '-' }),
             (($r | Measure-Object skipped -Sum).Sum),
-            ('{0:n0}' -f (Get-Mean $r.seconds)),
-            $(if ($null -ne $tok) { '{0:n0}' -f $tok } else { '-' }),
-            $(if ($null -ne $cost -and $cost -gt 0) { '{0:n2}' -f $cost } else { '-' }),
+            (Format-Invariant '{0:n0}' (Get-Mean $r.seconds)),
+            $(if ($null -ne $tok) { Format-Invariant '{0:n0}' $tok } else { '-' }),
+            $(if ($null -ne $cost -and $cost -gt 0) { Format-Invariant '{0:n2}' $cost } else { '-' }),
             (Format-Mean ($r | ForEach-Object { Get-RunValue $_ 'turns' })),
             (Format-Mean ($r | ForEach-Object { Get-RunValue $_ 'failedBuilds' })),
             (Format-Mean ($r | ForEach-Object { Get-RunValue $_ 'failedTestRuns' })),

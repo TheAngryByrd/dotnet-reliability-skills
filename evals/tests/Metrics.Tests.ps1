@@ -71,6 +71,12 @@ try {
     $rows = @($summary -split "`n" | Where-Object { $_ -match '^\| claude \| fix \|' })
     Assert-Equal '| claude | fix | with | 2 | 100% | 0 | 10 | 2 | 0.25 | 5.5 | 1.5 | 0.0 | 1 | 0 | 0 |' $rows[0] 'summary with-skill row'
     Assert-Equal '| claude | fix | without | 2 | 100% | 0 | 10 | 2 | 0.25 | 12.0 | 5.0 | 0.0 | 0 | 1 | 1 |' $rows[1] 'summary without-skill row'
+    $previousCulture = [Globalization.CultureInfo]::CurrentCulture
+    try {
+        [Globalization.CultureInfo]::CurrentCulture = [Globalization.CultureInfo]::new('de-DE')
+        $german = @((Write-Summary -Root $root -Results @(New-Run 'with' 4 0)) -split "`n" | Where-Object { $_ -match '^\| claude \| fix \|' })
+        Assert-Equal '| claude | fix | with | 1 | 100% | 0 | 10 | 2 | 0.25 | 4.0 | 0.0 | 0.0 | 0 | 0 | 0 |' $german[0] 'summary row does not depend on the culture'
+    } finally { [Globalization.CultureInfo]::CurrentCulture = $previousCulture }
 } finally { Remove-Item -Recurse -Force $root }
 
 if ($failures.Count) { $failures | ForEach-Object { Write-Error $_ -ErrorAction Continue }; exit 1 }
