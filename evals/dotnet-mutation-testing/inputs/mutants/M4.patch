@@ -1,0 +1,13 @@
+diff --git a/src/FsToolkit.ErrorHandling/Result.fs b/src/FsToolkit.ErrorHandling/Result.fs
+index 1d41633..8a5b4cd 100644
+--- a/src/FsToolkit.ErrorHandling/Result.fs
++++ b/src/FsToolkit.ErrorHandling/Result.fs
+@@ -426,7 +426,7 @@ let inline requireEqual (x1: 'value) (x2: 'value) (error: 'error) : Result<unit,
+     /// <param name="xs">The sequence to check.</param>
+     /// <returns>An <c>Ok</c> result if the sequence is empty, otherwise an <c>Error</c> result with the specified error value.</returns>
+     let inline requireEmpty (error: 'error) (xs: #seq<'value>) : Result<unit, 'error> =
+-        if Seq.isEmpty xs then Ok() else Error error
++        if Seq.length xs = 0 then Ok() else Error error
+ 
+     /// <summary>
+     /// Returns <c>Ok</c> if the sequence is not empty, or the specified error if it is.

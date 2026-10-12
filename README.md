@@ -69,6 +69,8 @@ These checks validate structure and examples. They do not certify every library 
 
 [Repository evaluations](docs/evaluations/README.md) apply the skills to real source with pinned revisions, executable checks, and explicit limits.
 
+The [eval harness](evals/README.md) runs tasks with and without each skill on Claude Code, Codex, and opencode, and grades both results.
+
 The package contains only the eleven .NET skills listed above. It has no hosted-service launch, browser authentication, remote debugger, or timeline-query skill.
 
 See [prerequisites](PREREQUISITES.md), [contributing](CONTRIBUTING.md), and [license notices](NOTICE).

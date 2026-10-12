@@ -1,0 +1,11 @@
+{"type":"step_start","part":{"type":"step-start"}}
+{"type":"tool_use","part":{"tool":"bash","state":{"status":"completed","input":{"command":"dotnet build"},"output":"Build FAILED.","metadata":{"exit":1}}}}
+{"type":"tool_use","part":{"tool":"read","state":{"status":"completed","input":{"filePath":"a.fs"},"output":"error FS0039"}}}
+{"type":"step_finish","part":{"reason":"tool-calls","tokens":{"input":10,"output":1,"reasoning":0,"cache":{"read":0,"write":0}},"cost":0.01}}
+{"type":"step_start","part":{"type":"step-start"}}
+{"type":"tool_use","part":{"tool":"bash","state":{"status":"completed","input":{"command":"dotnet fsi a.fsx"},"output":"a.fsx(1,1): error FS0078: missing","metadata":{"exit":0}}}}
+{"type":"tool_use","part":{"tool":"bash","state":{"status":"error","input":{"command":"dotnet test"},"error":"Command timed out"}}}
+{"type":"tool_use","part":{"tool":"bash","state":{"status":"completed","input":{"command":"dotnet run"},"output":"ok","metadata":{"exit":0}}}}
+{"type":"step_finish","part":{"reason":"tool-calls","tokens":{"input":10,"output":1,"reasoning":0,"cache":{"read":0,"write":0}},"cost":0.01}}
+{"type":"step_start","part":{"type":"step-start"}}
+{"type":"step_finish","part":{"reason":"stop","tokens":{"input":10,"output":1,"reasoning":0,"cache":{"read":0,"write":0}},"cost":0.01}}

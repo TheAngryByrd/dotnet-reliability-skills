@@ -1,0 +1,43 @@
+{
+  "skill": "dotnet-review-inputs",
+  "contaminationKeywords": ["generator", "FsCheck", "Hedgehog", "randomized"],
+  "tasks": [
+    {
+      "id": "icedtasks-properties",
+      "repository": {
+        "url": "https://github.com/TheAngryByrd/IcedTasks.git",
+        "commit": "c51e9fc63fb0c78887f5c418b0530453a2b2cf80"
+      },
+      "files": [],
+      "grader": "graders/icedtasks-properties.ps1",
+      "prompt": "This directory is a clone of IcedTasks. Review the FsCheck property tests in `tests/IcedTasks.Tests` for limits on the inputs and states that they explore. Do not change files in the repository. Write your review to `review.md` in this directory.",
+      "rubricDocument": "review.md",
+      "rubric": [
+        {
+          "id": "no-generated-input",
+          "question": "Does the review state that the `parallelism` properties generate no input values, because the property function takes `unit` (written `fun () ->`), so each FsCheck case runs the same fixed scenario?"
+        },
+        {
+          "id": "fixed-work",
+          "question": "Does the review state that the work sizes in the `parallelism` properties, the `yieldMany` counts 10000, 750, 500, 250, 100, and 1, are fixed constants that do not vary between cases?"
+        },
+        {
+          "id": "ci-case-count",
+          "question": "Does the review state that `fsCheckConfig` lowers the number of cases to `maxTest = 10` when the `CI` environment variable is set?"
+        },
+        {
+          "id": "scheduling-only",
+          "question": "Does the review state that thread scheduling or timing is the only thing that can differ between cases of the `parallelism` properties?"
+        },
+        {
+          "id": "replay-limit",
+          "question": "Does the review state that an FsCheck seed or replay cannot reproduce a failure of the `parallelism` properties, because such a failure depends on thread scheduling and not on generated values?"
+        },
+        {
+          "id": "evidence-kind",
+          "question": "Does the review say whether its statements about case counts or input distributions come from running the tests (measured) or from reading the source (inferred)?"
+        }
+      ]
+    }
+  ]
+}

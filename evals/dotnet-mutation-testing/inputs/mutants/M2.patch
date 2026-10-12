@@ -1,0 +1,13 @@
+diff --git a/src/FsToolkit.ErrorHandling/Result.fs b/src/FsToolkit.ErrorHandling/Result.fs
+index 1d41633..701a8e0 100644
+--- a/src/FsToolkit.ErrorHandling/Result.fs
++++ b/src/FsToolkit.ErrorHandling/Result.fs
+@@ -449,7 +449,7 @@ let inline requireNotEmpty (error: 'error) (xs: #seq<'value>) : Result<unit, 'er
+     /// <returns>An <c>Ok</c> result containing the first item of the sequence if it exists, otherwise an <c>Error</c> result with the specified error value.</returns>
+     let inline requireHead (error: 'error) (xs: #seq<'ok>) : Result<'ok, 'error> =
+         match Seq.tryHead xs with
+-        | Some x -> Ok x
++        | Some _ -> Ok(Seq.last xs)
+         | None -> Error error
+ 
+     /// <summary>

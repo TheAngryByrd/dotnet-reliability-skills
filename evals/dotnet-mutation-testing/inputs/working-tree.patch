@@ -1,0 +1,16 @@
+diff --git a/tests/FsToolkit.ErrorHandling.Tests/Result.fs b/tests/FsToolkit.ErrorHandling.Tests/Result.fs
+index 404208d..5e1f6f0 100644
+--- a/tests/FsToolkit.ErrorHandling.Tests/Result.fs
++++ b/tests/FsToolkit.ErrorHandling.Tests/Result.fs
+@@ -470,6 +470,11 @@ Result.requireNotEmpty err []
+             Result.requireHead err [ 42 ]
+             |> Expect.hasOkValue 42
+ 
++        testCase "requireHead returns the first of many"
++        <| fun _ ->
++            Result.requireHead err [ 1; 2; 3 ]
++            |> Expect.hasOkValue 1
++
+         testCase "requireHead error path"
+         <| fun _ ->
+             Result.requireHead err []
