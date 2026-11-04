@@ -17,6 +17,8 @@ Review how generated inputs and operation sequences reach different system state
 5. Check which distributions change between cases, between runs, or never.
 6. Report each limitation with a source location, excluded behavior, and domain assumptions.
 
+Use the F# API rules in [the exploration checklist](references/exploration.md) when you judge F# generators.
+
 For FsCheck, inspect size parameters, custom `Arbitrary` instances, filtering, labels, classification, and shrinkers. Distinguish exhausted generation from a passing property.
 
 For Hedgehog, inspect ranges and composed generators. Integrated shrinking does not establish application-specific validity automatically.

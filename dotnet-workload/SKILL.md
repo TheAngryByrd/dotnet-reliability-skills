@@ -21,11 +21,12 @@ If the catalog is missing, document the specific claim and its evidence before i
 1. Inspect the existing test framework, target frameworks, generator library, dependency setup, and runner command.
 2. Map each claim to production calls, legal inputs, independent expected results, and a failure signal.
 3. Use FsCheck or Hedgehog when generated cases add value. Preserve the installed major version and existing adapters.
-4. Include type boundaries and configured limits. Keep shrinkers within the valid domain and preserve operation dependencies.
-5. For stateful workloads, track attempted, acknowledged, rejected, and ambiguous operations separately.
-6. Retry only failures permitted by the contract. Preserve idempotency keys and ambiguous outcomes.
-7. Record reach conditions separately from invariant checks. Include a trigger and a bound for progress properties.
-8. Execute the narrow workload and verify that it exercised the intended code. Update the catalog with the actual result.
+4. Build F# generators from the production smart constructors, not raw construction. FsCheck 3 uses `Gen`, `Arb.fromGenShrink`, and `Config.WithArbitrary`. Hedgehog uses `Range` and shrinks with the generator. Weight union cases with `Gen.frequency`, and prove the workload reaches the intended state. If `dotnet-feature-workload` is installed, read its generators reference.
+5. Include type boundaries and configured limits. Keep shrinkers within the valid domain and preserve operation dependencies.
+6. For stateful workloads, track attempted, acknowledged, rejected, and ambiguous operations separately.
+7. Retry only failures permitted by the contract. Preserve idempotency keys and ambiguous outcomes.
+8. Record reach conditions separately from invariant checks. Include a trigger and a bound for progress properties.
+9. Execute the narrow workload and verify that it exercised the intended code. Update the catalog with the actual result.
 
 ## Runtime constraints
 

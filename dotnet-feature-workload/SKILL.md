@@ -13,7 +13,7 @@ Start with a completed or developing feature. Produce executable checks that cal
 1. Read the feature, nearby tests, project files, package versions, and test commands. Preserve the repository's framework and SDK.
 2. Identify concrete invariants, input boundaries, failure outcomes, and important reachable states.
 3. Separate implemented behavior from planned behavior. Do not disguise an unimplemented requirement as a passing or silently skipped test.
-4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version.
+4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version. Before you write an F# generator, shrinker, model, or replay setup, read [F# generators](references/generators.md).
 5. Construct legal domain values through supported constructors. Keep invalid raw input separate to test parsing failures.
 6. Build operations, independent expected results, and explicit reach observations. Ensure the workload invokes production code. Write a shrinker with each custom generator of a structured value.
 7. Use real external dependencies where their behavior is part of the property. Preserve the existing host or container setup.
@@ -38,7 +38,7 @@ Record the property, source revision, runner command, target framework, runtime,
 
 Preserve a minimized failing input as a deterministic regression when appropriate. A passing rerun does not erase the original failure.
 
-The [C# and F# examples](assets/examples/README.md) demonstrate FsCheck checks and fake time. They are executable API examples, not a replacement test framework.
+The [C# and F# examples](assets/examples/README.md) demonstrate FsCheck checks and fake time. The [F# generators example](assets/examples/Generators/Program.fs) demonstrates FsCheck and Hedgehog generators, a state machine, and replay. They are executable API examples, not a replacement test framework.
 
 ## Completion
 
