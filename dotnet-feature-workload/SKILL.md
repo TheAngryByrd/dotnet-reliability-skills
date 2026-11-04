@@ -17,7 +17,7 @@ Start with a completed or developing feature. Produce executable checks that cal
 1. Read the feature, nearby tests, project files, package versions, and test commands. Preserve the repository's framework and SDK.
 2. Identify concrete invariants, input boundaries, failure outcomes, and important reachable states.
 3. Separate implemented behavior from planned behavior. Do not disguise an unimplemented requirement as a passing or silently skipped test.
-4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version. Before you write an F# generator, shrinker, model, or replay setup, read [F# generators](references/generators.md).
+4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version. Before you write an F# generator, shrinker, model, or replay setup, read [F# generators](references/generators.md). Before you write a test that generates operation sequences and compares the system with a model, read [stateful and model-based tests](references/stateful.md).
 5. Construct legal domain values through supported constructors. Keep invalid raw input separate to test parsing failures.
 6. Build operations, independent expected results, and explicit reach observations. Ensure the workload invokes production code. Write a shrinker with each custom generator of a structured value.
 7. Use real external dependencies where their behavior is part of the property. Preserve the existing host or container setup.

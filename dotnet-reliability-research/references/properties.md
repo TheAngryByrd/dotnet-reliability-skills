@@ -4,6 +4,8 @@
 
 Record a stable slug, claim, priority, source locations, preconditions, input domain, observable result, oracle, and test method.
 
+For a stateful property, also record the model, the operations, their preconditions, and the postconditions.
+
 Also record the observation bound, reach condition, fault model, expected failure, existing coverage, implementation status, and open questions.
 
 Use explicit outcomes: observed pass, observed violation, not exercised, inconclusive, or unsupported. A timeout is not automatically a product defect.
@@ -15,6 +17,7 @@ Use explicit outcomes: observed pass, observed violation, not exercised, inconcl
 | Pure transformation or parsing | Existing test framework plus FsCheck or Hedgehog | Preserve valid values through generation and shrinking |
 | Stateful API sequence | Generated commands, independent model, real implementation | Sequential commands do not test concurrent interleavings |
 | Async cancellation or deadlines | Controlled signals and injected `TimeProvider` | Fake time controls only consumers of that provider |
+| Concurrent API linearizability | Test the sequential model first. Then run a prefix and two short branches, record invocations and responses, and search for a serialization that keeps real-time order | Covers only the schedules that ran. Needs Coyote or a controlled scheduler for interleaving claims |
 | Task concurrency | Explicit barriers, then Coyote if compatible | Coyote controls supported rewritten operations, not all .NET execution |
 | Persistence or protocol behavior | Real dependency through Testcontainers or an existing local environment | In-memory substitutes do not establish durable recovery |
 | Multi-service lifecycle | Existing Aspire AppHost or focused container setup | Orchestration does not provide deterministic scheduling |

@@ -47,18 +47,7 @@ Open `Hedgehog` and `Hedgehog.FSharp`. Do not open `FsCheck.FSharp` in the same 
 
 ## Model-based tests
 
-Use a model when the property is "the implementation agrees with a simple oracle after every operation".
-
-- FsCheck 3 has `FsCheck.Experimental`. Inherit `Machine<'Actual, 'Model>(maxCommands)`. Override `Setup` with an `Arbitrary<Setup<_, _>>` and `Next model` with a generator of `Operation<_, _>`.
-- `Operation.Run model` returns the model after the operation. `Operation.Check(actual, model)` receives that new model, applies the operation to `actual`, and returns a `Property` that compares them.
-- Run the machine with `StateMachine.toProperty machine`.
-- Write the model so it does not call the production code. The example model is an integer and a pure function.
-- For a Hedgehog sequence, generate the list of commands, fold them over a model and the system, and compare after each step.
-- `Machine(n)` generates exactly `n` operations unless a `StopOperation` is drawn or no operation from `Next` satisfies `Pre`. In that case the sequence ends early.
-- Override `Pre` for an operation that has preconditions. FsCheck 3.4.0 evaluates `Pre` against the model when it generates a sequence and when it shrinks one. It does not evaluate `Pre` when it runs the sequence. During generation, a false `Pre` makes FsCheck draw again. During shrinking, a false `Pre` drops that operation. `Pre` sees only the model, not the system.
-- The default `ShrinkOperations` removes one operation at a time. It does not shrink the values inside an operation. Override `ShrinkOperations` to shrink those values, or counterexamples keep their random values.
-- In a Hedgehog sequence, shrinking drops commands, so a dependent command can become illegal. Make the model and the system handle it in the same way.
-- `FsCheck.Experimental` is an experimental namespace. Its API can change between versions.
+For a sequence of operations compared with a model, read [stateful and model-based tests](stateful.md).
 
 ## Replay
 
@@ -74,8 +63,8 @@ Plant a defect at a boundary and confirm that each generator-based check fails. 
 Run the example with:
 
 ```sh
-dotnet run --project Generators/Generators.fsproj
-dotnet run --project Generators/Generators.fsproj -- --mutant
+dotnet run --project assets/examples/Generators/Generators.fsproj
+dotnet run --project assets/examples/Generators/Generators.fsproj -- --mutant
 ```
 
 The first command must exit 0. The second must exit 1.

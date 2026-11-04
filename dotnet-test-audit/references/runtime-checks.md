@@ -35,6 +35,16 @@ Select checks that match the tested contract. These are audit questions, not rea
 - Retain replay seeds and library versions. Seed replay does not reproduce arbitrary thread scheduling.
 - Keep useful fixed regressions beside generated properties when their cases are not guaranteed by generation.
 
+## State-machine tests
+
+- Confirm that the model does not call production code or repeat its algorithm.
+- Check that `Check` compares the value that an operation returns, and not only the state afterward.
+- Check that no `Pre` excludes the operation under test. In FsCheck 3, `Pre` sees only the model.
+- Check that teardown runs after an exception. FsCheck skips `TearDown` when `Check` throws.
+- Check whether parallel cases or parallel runner tests share one dependency. `ParallelRunConfig` runs cases in parallel and does not test linearizability.
+- Check whether later operations run against a destructive dependency after the first failure. FsCheck calls `Check` for every operation.
+- Look for a reach classification or counter. A passing machine proves nothing about a state that no sequence reaches.
+
 ## Compilation and compatibility
 
 - F# inline functions can execute from consumer assemblies. A producer-only rebuild can leave the old implementation in the test binary.

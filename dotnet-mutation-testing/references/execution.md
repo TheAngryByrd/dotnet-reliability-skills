@@ -27,6 +27,13 @@ Avoid stale binaries: build the mutated project and its consumers with the origi
 
 Before removing a worktree, verify its absolute path, ownership, and saved evidence. Never clean an unrelated checkout.
 
+## Model-based and stateful checks
+
+- Put the mutant in a transition that the generated sequences must reach.
+- Confirm that the mutated transition ran, with an operation classification or a reach counter.
+- Record the shrunk operation sequence and the replay token as the detection evidence.
+- A mutant that the machine never reached is Not exercised, not Survived.
+
 ## Verdicts
 
 | Verdict | Required evidence |
