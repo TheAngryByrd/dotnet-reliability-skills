@@ -114,9 +114,12 @@ module FsCheckGenerators =
                     override _.ToString() = sprintf "%A" request })
 
     let sequences mutant =
-        let sampled = Gen.sample 200 (Gen.listOf requestGen)
-        if not (sampled |> Seq.exists reachesCapacity) then failwith "No generated sequence reached capacity"
-        Check.One(config, poolMatchesModel mutant)
+        let reached = ref 0
+        let checkSequence (requests: Request list) =
+            if reachesCapacity requests then reached.Value <- reached.Value + 1
+            poolMatchesModel mutant requests
+        Check.One(config, checkSequence)
+        if reached.Value = 0 then failwith "No checked sequence reached capacity"
 
     let machine mutant =
         Check.One(config, StateMachine.toProperty (PoolMachine(mutant)))
@@ -167,13 +170,13 @@ module HedgehogGenerators =
             let data = failure.RecheckInfo |> Option.map (fun info -> RecheckData.serialize info.Data)
             let recheck = Property.reportRecheck data.Value (poolMatchesModel mutant)
             if recheck.Status = Status.OK then failwith "Hedgehog recheck did not reproduce the failure"
-            failwithf "Hedgehog falsified after %d shrinks. Recheck reproduced the failure." failure.Shrinks
+            failwithf "Hedgehog falsified after %d shrinks. Recheck reproduced the failure.
+Replay token: %s" failure.Shrinks data.Value
         | Status.GaveUp -> failwith "Hedgehog gave up"
 
 let (|Violation|_|) (error: exn) =
-    match error.Message.Split('\n')[0] with
-    | line when line.StartsWith "Falsifiable" || line.StartsWith "Hedgehog falsified" -> Some line
-    | _ -> None
+    let message = error.Message
+    if message.StartsWith "Falsifiable" || message.StartsWith "Hedgehog falsified" then Some message else None
 
 [<EntryPoint>]
 let main args =

@@ -43,7 +43,7 @@ Open `Hedgehog` and `Hedgehog.FSharp`. Do not open `FsCheck.FSharp` in the same 
 - Generate values through the production smart constructor, as in `(Quantity.create n).Value` in the example. Generate from a range that the constructor accepts. Do not build a private case by reflection or a second public constructor.
 - Keep generators for invalid input separate. Feed them to the parser or the constructor and assert the error.
 - Weight union cases to match real use. The example reserves more often than it releases and queries rarely. Check the weights against the state that the property must reach.
-- Prove reach. The example samples the generator and fails if no sequence fills the pool. A passing property over sequences that never fill the pool does not test the boundary.
+- Prove reach. The example counts, inside the checked property, the sequences that fill the pool, and fails if the count is zero. A separate `Gen.sample` run uses a different seed and size, so it does not prove reach for the checked cases. A passing property over sequences that never fill the pool does not test the boundary.
 
 ## Model-based tests
 
