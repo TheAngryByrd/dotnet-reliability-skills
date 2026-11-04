@@ -2,6 +2,10 @@
 
 Changes to the .NET reliability skills, newest first.
 
+## 2026-11-04
+
+- feat: add F# property-test generator guidance for FsCheck and Hedgehog ([PR #6](https://github.com/TheAngryByrd/dotnet-reliability-skills/pull/6))
+
 ## 2026-09-23
 
 - Evaluate focused contracts in four F# repositories and clarify deterministic workload reuse and FsCheck replay counts.
