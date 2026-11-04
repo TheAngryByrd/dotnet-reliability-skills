@@ -3,12 +3,12 @@ name: dotnet-reliability-research
 description: Analyze a C# or F# system and produce an evidence-backed catalog of reliability properties and suitable .NET test methods. Use before designing property tests, concurrency tests, or integration workloads.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 86ab048"
+  version: "2026-11-04 24130a9"
 ---
 
 # Research .NET reliability properties
 
-**Skill version:** `2026-11-04 86ab048`
+**Skill version:** `2026-11-04 24130a9`
 
 Produce a system model, property catalog, per-property evidence, and a minimal test topology. Research does not authorize implementation or dependency changes.
 

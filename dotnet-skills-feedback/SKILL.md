@@ -3,12 +3,12 @@ name: dotnet-skills-feedback
 description: Prepare a reviewable GitHub bug report for the .NET reliability skills, including skill revision, agent details, runtime context, and observed failure. Does not submit the report automatically.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 86ab048"
+  version: "2026-11-04 24130a9"
 ---
 
 # Prepare skill feedback
 
-**Skill version:** `2026-11-04 86ab048`
+**Skill version:** `2026-11-04 24130a9`
 
 Use the installed skill repository's configured issue destination. For this distribution, it is:
 

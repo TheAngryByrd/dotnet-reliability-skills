@@ -3,12 +3,12 @@ name: dotnet-workload
 description: Implement or extend C# or F# reliability workloads from an existing property catalog. Map each property to production calls, independent assertions, reach observations, and repository-compatible .NET execution.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 86ab048"
+  version: "2026-11-04 24130a9"
 ---
 
 # Implement a .NET reliability property
 
-**Skill version:** `2026-11-04 86ab048`
+**Skill version:** `2026-11-04 24130a9`
 
 Use this skill when a catalog already describes the property. For feature discovery, use `dotnet-feature-workload` if installed, or perform the needed analysis directly.
 

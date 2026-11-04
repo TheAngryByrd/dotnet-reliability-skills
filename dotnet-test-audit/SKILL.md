@@ -3,12 +3,12 @@ name: dotnet-test-audit
 description: Audit C# and F# tests for meaningful regression detection, redundant coverage, and implementation coupling. Use for test reviews, proposed test additions, or scoped suite cleanup while preserving independently useful contracts.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 86ab048"
+  version: "2026-11-04 24130a9"
 ---
 
 # Audit .NET test value
 
-**Skill version:** `2026-11-04 86ab048`
+**Skill version:** `2026-11-04 24130a9`
 
 Identify what each test can detect before recommending a change. Optimize confidence and maintenance cost, not test count or deleted lines.
 
