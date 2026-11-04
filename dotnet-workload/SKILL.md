@@ -27,7 +27,7 @@ If the catalog is missing, document the specific claim and its evidence before i
 3. Use FsCheck or Hedgehog when generated cases add value. Preserve the installed major version and existing adapters.
 4. Build F# generators from the production smart constructors, not raw construction. FsCheck 3 uses `Gen`, `Arb.fromGenShrink`, and `Config.WithArbitrary`. Hedgehog uses `Range` and shrinks with the generator. Weight union cases with `Gen.frequency`, and prove the workload reaches the intended state. If `dotnet-feature-workload` is installed, read its generators reference.
 5. Include type boundaries and configured limits. Keep shrinkers within the valid domain and preserve operation dependencies.
-6. For stateful workloads, track attempted, acknowledged, rejected, and ambiguous operations separately.
+6. For stateful workloads, track attempted, acknowledged, rejected, and ambiguous operations separately. Compare the value that each operation returns with the model, not only the final state. FsCheck `Pre` sees only the model and is never checked at execution. Reset a real dependency for each run, and do not share it between parallel cases. If `dotnet-feature-workload` is installed, read its stateful reference.
 7. Retry only failures permitted by the contract. Preserve idempotency keys and ambiguous outcomes.
 8. Record reach conditions separately from invariant checks. Include a trigger and a bound for progress properties.
 9. Execute the narrow workload and verify that it exercised the intended code. Update the catalog with the actual result.

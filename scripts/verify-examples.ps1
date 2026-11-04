@@ -30,17 +30,19 @@ $baselineExit = $LASTEXITCODE
 $baseline | Write-Output
 if ($baselineExit -ne 0) { throw "Baseline failed: Generators (exit $baselineExit)" }
 
-$mutant = & dotnet run --project $generatorsProject --configuration Release --no-build -- --mutant 2>&1
-$mutantExit = $LASTEXITCODE
-$mutant | Write-Output
-$mutantText = $mutant | ForEach-Object { $_.ToString() }
 $expectedViolations = @('FsCheck sequences', 'FsCheck state machine', 'Hedgehog sequences')
-$missing = $expectedViolations | Where-Object {
-    $name = $_
-    -not ($mutantText | Where-Object { $_.StartsWith("PROPERTY_VIOLATION: ${name}:") })
-}
-if ($mutantExit -ne 1 -or $missing) {
-    throw "Expected generator violations were not observed: $($missing -join ', ') (exit $mutantExit)"
+foreach ($flag in @('--mutant', '--mutant-ack', '--mutant-throw')) {
+    $mutant = & dotnet run --project $generatorsProject --configuration Release --no-build -- $flag 2>&1
+    $mutantExit = $LASTEXITCODE
+    $mutant | Write-Output
+    $mutantText = $mutant | ForEach-Object { $_.ToString() }
+    $missing = $expectedViolations | Where-Object {
+        $name = $_
+        -not ($mutantText | Where-Object { $_.StartsWith("PROPERTY_VIOLATION: ${name}:") })
+    }
+    if ($mutantExit -ne 1 -or $missing) {
+        throw "Expected generator violations were not observed with ${flag}: $($missing -join ', ') (exit $mutantExit)"
+    }
 }
 
 exit 0
