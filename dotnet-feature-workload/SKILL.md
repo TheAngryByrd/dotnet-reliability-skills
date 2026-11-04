@@ -15,7 +15,7 @@ Start with a completed or developing feature. Produce executable checks that cal
 3. Separate implemented behavior from planned behavior. Do not disguise an unimplemented requirement as a passing or silently skipped test.
 4. Read [runtime semantics](references/runtime.md). Reuse deterministic tests when they cover the contract. For generated cases, select an existing generator or a compatible FsCheck or Hedgehog version.
 5. Construct legal domain values through supported constructors. Keep invalid raw input separate to test parsing failures.
-6. Build operations, independent expected results, and explicit reach observations. Ensure the workload invokes production code.
+6. Build operations, independent expected results, and explicit reach observations. Ensure the workload invokes production code. Write a shrinker with each custom generator of a structured value.
 7. Use real external dependencies where their behavior is part of the property. Preserve the existing host or container setup.
 8. Run a bounded local workload. Record executed cases, rejected cases, reached states, failures, and replay data.
 9. Diagnose an unreached state before changing an invariant. Confirm whether a failure belongs to the feature, generator, oracle, or environment.
