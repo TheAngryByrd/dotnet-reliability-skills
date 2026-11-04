@@ -77,4 +77,4 @@ dotnet run --project Generators/Generators.fsproj -- --mutant
 
 The first command must exit 0. The second must exit 1.
 
-References: [FsCheck](https://fscheck.github.io/FsCheck/), [FsCheck stateful testing](https://fscheck.github.io/FsCheck/StateMachine.html), [Hedgehog](https://hedgehogqa.github.io/fsharp-hedgehog/).
+References: [FsCheck](https://fscheck.github.io/FsCheck/), [Hedgehog](https://hedgehogqa.github.io/fsharp-hedgehog/).
