@@ -3,12 +3,12 @@ name: dotnet-review-inputs
 description: Review C# or F# randomized test generators and workloads for limits on state space exploration. Use for FsCheck, Hedgehog, and custom generators. Produces findings without changing code.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 2d03549"
+  version: "2026-11-04 86ab048"
 ---
 
 # Review .NET workload inputs
 
-**Skill version:** `2026-11-04 2d03549`
+**Skill version:** `2026-11-04 86ab048`
 
 Review how generated inputs and operation sequences reach different system states. Keep assertion quality and system correctness outside this review.
 

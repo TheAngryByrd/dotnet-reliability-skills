@@ -3,12 +3,12 @@ name: dotnet-test-setup
 description: Prepare a local C# or F# integration-test environment using existing .NET hosts, Testcontainers, Aspire, or Docker Compose. Use when reliability tests need real services and repeatable startup and cleanup.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 2d03549"
+  version: "2026-11-04 86ab048"
 ---
 
 # Prepare a .NET test environment
 
-**Skill version:** `2026-11-04 2d03549`
+**Skill version:** `2026-11-04 86ab048`
 
 Build the smallest environment that preserves the properties under test. Setup does not include production deployment.
 
