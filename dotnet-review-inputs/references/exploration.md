@@ -25,4 +25,14 @@ Inspect .NET distinctions: `null` versus empty, F# `None` versus `Some`, UTF-16 
 
 Include culture, timezone, and serialization variation only when they affect the contract. `DateTimeOffset` records an offset, not a timezone rule set.
 
+## F# generator API facts
+
+- FsCheck 3 modules `Gen`, `Arb`, `ArbMap`, and `Prop` are in `FsCheck.FSharp`. FsCheck 2 uses different registration. Confirm the installed major version before you report a misuse.
+- `Arb.fromGen` gives a custom type no shrinker. `Arb.fromGenShrink` does. Report a shrinker that can produce a value the production constructor rejects.
+- `Gen.where` retries with a growing size and can hang or skew sizes. `Prop.filter` discards cases and can exhaust or pass vacuously. Check the acceptance rate. Prefer a generator that builds valid values through the smart constructor.
+- `Gen.frequency` sets case weights. A weight of zero or a rare case can leave a state unreached.
+- FsCheck `Replay` with `Size = Some n` runs one case, whatever `MaxTest` is. A seed reproduces inputs and not thread schedules.
+- Hedgehog generators take a `Range`. `Range.constant` ignores size and `Range.linear` grows with it. Shrinking is integrated, so a smart-constructor generator cannot shrink to an invalid value.
+- Model-based tests need an oracle that does not call the production code, and operations that stay legal after shrinking.
+
 References: [FsCheck](https://fscheck.github.io/FsCheck/), [Hedgehog](https://hedgehogqa.github.io/fsharp-hedgehog/).

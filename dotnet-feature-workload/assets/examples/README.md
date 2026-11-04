@@ -31,3 +31,14 @@ The flag selects a deliberately incorrect comparison. This demonstration does no
 Fake time controls only the injected timers. The real-time watchdog bounds each await. No result claims deterministic scheduling of the whole runtime.
 
 These are API examples. Use the target repository's actual test framework when implementing a workload.
+
+## F# generators example
+
+`Generators/` shows FsCheck 3.4.0 and Hedgehog 2.0.4 generators for a pool with a capacity. It covers smart-constructor generators, a registered `Arbitrary` with a shrinker, weighted union cases, a state-machine test, and seed replay. See the [generators reference](../../references/generators.md).
+
+```sh
+dotnet run --project Generators/Generators.fsproj
+dotnet run --project Generators/Generators.fsproj -- --mutant
+```
+
+The first command must exit 0. The second must exit 1 and print `PROPERTY_VIOLATION` for `FsCheck sequences`, `FsCheck state machine`, and `Hedgehog sequences`.

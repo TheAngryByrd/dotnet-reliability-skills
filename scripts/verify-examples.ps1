@@ -21,4 +21,26 @@ foreach ($project in $projects) {
     }
 }
 
+$generatorsProject = Join-Path $exampleRoot 'Generators/Generators.fsproj'
+& dotnet build $generatorsProject --configuration Release --nologo
+if ($LASTEXITCODE -ne 0) { throw "Build failed: Generators" }
+
+$baseline = & dotnet run --project $generatorsProject --configuration Release --no-build 2>&1
+$baselineExit = $LASTEXITCODE
+$baseline | Write-Output
+if ($baselineExit -ne 0) { throw "Baseline failed: Generators (exit $baselineExit)" }
+
+$mutant = & dotnet run --project $generatorsProject --configuration Release --no-build -- --mutant 2>&1
+$mutantExit = $LASTEXITCODE
+$mutant | Write-Output
+$mutantText = $mutant | ForEach-Object { $_.ToString() }
+$expectedViolations = @('FsCheck sequences', 'FsCheck state machine', 'Hedgehog sequences')
+$missing = $expectedViolations | Where-Object {
+    $name = $_
+    -not ($mutantText | Where-Object { $_.StartsWith("PROPERTY_VIOLATION: ${name}:") })
+}
+if ($mutantExit -ne 1 -or $missing) {
+    throw "Expected generator violations were not observed: $($missing -join ', ') (exit $mutantExit)"
+}
+
 exit 0
