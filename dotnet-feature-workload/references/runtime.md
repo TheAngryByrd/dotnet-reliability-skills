@@ -54,6 +54,6 @@ Use independent expected results. Repeating the implementation's algorithm or te
 
 Preserve F# private representations, discriminated unions, records, and units of measure. Preserve C# constructor and factory constraints.
 
-Ensure shrinkers preserve domain invariants and dependent operation preconditions. Test malformed transport values at the parser boundary.
+Write a shrinker for each custom generator of a structured value, such as a record, union, tree, or operation sequence. Without one, a failure reports the full random case. Shrink toward a smaller case: drop or replace elements, and simplify fields to a default. Ensure shrinkers preserve domain invariants and dependent operation preconditions. Seed a known defect once and confirm that the reported counterexample is small. Test malformed transport values at the parser boundary.
 
 Check integer overflow behavior, floating-point NaN/infinity, collection equality, UTF-16 boundaries, and serializer behavior only where the feature uses them.
