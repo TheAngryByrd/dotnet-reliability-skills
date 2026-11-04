@@ -2,9 +2,13 @@
 name: dotnet-library-documentation
 description: Verify C# or F# testing-library APIs and .NET runtime behavior against the installed versions and authoritative documentation. Use for FsCheck, Hedgehog, Stryker.NET, Coyote, test runners, and runtime contract questions.
 license: Apache-2.0
+metadata:
+  version: "2026-11-04 2d03549"
 ---
 
 # Read version-matched .NET documentation
+
+**Skill version:** `2026-11-04 2d03549`
 
 ## Resolve the version
 

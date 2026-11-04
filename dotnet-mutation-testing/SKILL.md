@@ -2,9 +2,13 @@
 name: dotnet-mutation-testing
 description: Evaluate whether C# or F# reliability checks detect realistic source defects. Use Stryker.NET where supported or isolated manual mutants, with a green baseline and per-property failure evidence.
 license: Apache-2.0
+metadata:
+  version: "2026-11-04 2d03549"
 ---
 
 # Validate .NET checks with mutations
+
+**Skill version:** `2026-11-04 2d03549`
 
 The target is the test oracle. One detected mutation shows sensitivity to that defect, not complete correctness.
 

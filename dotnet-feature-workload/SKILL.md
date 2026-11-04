@@ -2,9 +2,13 @@
 name: dotnet-feature-workload
 description: Build or reuse a focused C# or F# test workload for one feature using existing .NET test libraries. Use to exercise invariants, reach conditions, async behavior, and bounded progress locally.
 license: Apache-2.0
+metadata:
+  version: "2026-11-04 2d03549"
 ---
 
 # Build a .NET feature workload
+
+**Skill version:** `2026-11-04 2d03549`
 
 Start with a completed or developing feature. Produce executable checks that call its real implementation, plus a record of what they establish.
 
