@@ -54,7 +54,10 @@ Use a model when the property is "the implementation agrees with a simple oracle
 - Run the machine with `StateMachine.toProperty machine`.
 - Write the model so it does not call the production code. The example model is an integer and a pure function.
 - For a Hedgehog sequence, generate the list of commands, fold them over a model and the system, and compare after each step.
-- Override `Pre` for an operation that has preconditions. FsCheck skips an operation when `Pre` is false, so `Check` must not assume that earlier operations ran. In a Hedgehog sequence, shrinking drops commands, so a dependent command can become illegal. Make the model and the system handle it in the same way.
+- `Machine(n)` generates exactly `n` operations unless a `StopOperation` is drawn or no operation from `Next` satisfies `Pre`. In that case the sequence ends early.
+- Override `Pre` for an operation that has preconditions. FsCheck 3.4.0 evaluates `Pre` against the model when it generates a sequence and when it shrinks one. It does not evaluate `Pre` when it runs the sequence. During generation, a false `Pre` makes FsCheck draw again. During shrinking, a false `Pre` drops that operation. `Pre` sees only the model, not the system.
+- The default `ShrinkOperations` removes one operation at a time. It does not shrink the values inside an operation. Override `ShrinkOperations` to shrink those values, or counterexamples keep their random values.
+- In a Hedgehog sequence, shrinking drops commands, so a dependent command can become illegal. Make the model and the system handle it in the same way.
 - `FsCheck.Experimental` is an experimental namespace. Its API can change between versions.
 
 ## Replay
