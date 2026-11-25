@@ -2,9 +2,13 @@
 name: dotnet-coyote
 description: Use Microsoft Coyote to exercise interleavings and replay concurrency failures in C# or F#. Use when testing shared state, investigating a task race, or checking whether Coyote controls a specific .NET execution path.
 license: Apache-2.0
+metadata:
+  version: "2026-11-25 34744f7"
 ---
 
 # Test concurrent .NET code with Coyote
+
+**Skill version:** `2026-11-25 34744f7`
 
 1. Identify the state owner, competing operations, and observable failure. For example, two successful results from one available permit violate the claim contract.
 2. Inspect the target framework, SDK, Coyote CLI and package versions, and concurrency primitives. For F#, also identify FSharp.Core and the computation expression. Use the [F# reference](references/fsharp.md) to check the execution path.

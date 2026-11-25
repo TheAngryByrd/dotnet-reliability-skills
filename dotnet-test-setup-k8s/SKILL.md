@@ -3,12 +3,12 @@ name: dotnet-test-setup-k8s
 description: Adapt Kubernetes deployments for scoped C# or F# integration and reliability tests. Use when cluster behavior is part of the test and Helm, Kustomize, or raw manifests already exist.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 24130a9"
+  version: "2026-11-25 34744f7"
 ---
 
 # Prepare Kubernetes for .NET reliability tests
 
-**Skill version:** `2026-11-04 24130a9`
+**Skill version:** `2026-11-25 34744f7`
 
 Do not introduce Kubernetes for a pure library or an integration test that needs only one local dependency.
 

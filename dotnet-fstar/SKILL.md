@@ -2,9 +2,13 @@
 name: dotnet-fstar
 description: Use F* to prove a pure contract for a .NET component, extract the verified function to F#, or compare an existing F# implementation with a verified model. Use for invariants, state transitions, and proof boundaries.
 license: Apache-2.0
+metadata:
+  version: "2026-11-25 34744f7"
 ---
 
 # Verify a .NET component with F*
+
+**Skill version:** `2026-11-25 34744f7`
 
 1. State the input domain, preconditions, observable result, and required property. Identify the part that can run as a pure function. Keep I/O and concurrent state updates in the application unless the specification models them.
 2. Choose how the proof relates to the shipped code. An application can call an extracted F# implementation. A separately maintained F# or C# implementation can use the verified model as a test oracle.

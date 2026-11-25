@@ -3,12 +3,12 @@ name: dotnet-test-triage
 description: Investigate C# or F# reliability-test failures using runner results, property counterexamples, logs, traces, and source. Use for failed, hung, flaky, or unexercised .NET tests without assuming a specific test platform.
 license: Apache-2.0
 metadata:
-  version: "2026-11-04 24130a9"
+  version: "2026-11-25 34744f7"
 ---
 
 # Triage .NET reliability tests
 
-**Skill version:** `2026-11-04 24130a9`
+**Skill version:** `2026-11-25 34744f7`
 
 ## Establish what ran
 
