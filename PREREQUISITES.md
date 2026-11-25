@@ -8,7 +8,9 @@ Inspect central package files, Paket files, local tool manifests, and imported b
 
 If the required SDK is missing, use an isolated installation of that version when permitted. Keep the repository's SDK selection intact.
 
-The included examples require a .NET 8 SDK, the .NET 8 runtime, and NuGet access. The verification script requires PowerShell 7.
+The workload examples require a .NET 8 SDK, the .NET 8 runtime, and NuGet access. The verification script requires PowerShell 7.
+
+The [Coyote example](dotnet-coyote/references/fsharp.md) also needs the matching Coyote CLI and ASP.NET Core runtime. The [F* example](dotnet-fstar/references/fsharp.md) uses the F* release binaries and a .NET SDK that can build and run the extracted F# library.
 
 Other repositories can require newer SDKs, preview compilers, native tools, or additional runtimes. Their requirements take precedence over the example projects.
 

@@ -4,6 +4,8 @@ Repository evaluations test whether the skills select suitable methods and produ
 
 ## Results
 
+The [Coyote and F* evaluation](2026-11-24-coyote-fstar/README.md) checks race replay, rejection of a faulty transition, and execution of extracted F#.
+
 The [2026-09-23 evaluation](2026-09-23/README.md) covers Fantomas, IcedTasks, FsToolkit.ErrorHandling, and FsAutoComplete.
 
 The [FsAutoComplete research rerun](2026-09-23/fsautocomplete-research/system.md) applies the corrected repository-wide scope requirements. It retains the full research artifacts.

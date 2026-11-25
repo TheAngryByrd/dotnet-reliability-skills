@@ -9,6 +9,8 @@ These skills work with C# and F# source, existing test projects, and .NET runtim
 | Understand which guarantees need testing | `dotnet-reliability-research` | Prioritized properties with source evidence and suitable test methods |
 | Build tests for one feature | `dotnet-feature-workload` | A focused workload that calls the real implementation |
 | Implement a property already described in a catalog | `dotnet-workload` | Executable checks and an updated property record |
+| Reproduce a race between callers | [dotnet-coyote](../dotnet-coyote/SKILL.md) | A controlled workload and a replay trace, or the operation that prevented control |
+| Prove a pure rule used by F# | [dotnet-fstar](../dotnet-fstar/SKILL.md) | A checked F* contract and an extracted function for the application or its tests |
 | Find limits in randomized inputs | `dotnet-review-inputs` | A read-only review of generators, shrinkers, state, and timing |
 | Check whether tests notice realistic defects | `dotnet-mutation-testing` | Baseline, isolated mutants, and evidence for each verdict |
 | Start the dependencies needed by integration tests | `dotnet-test-setup` | A verified local environment with bounded cleanup |
@@ -79,6 +81,6 @@ Preserve source revision, relevant configuration, SDK/runtime, package versions,
 
 ## Scope of the package
 
-The package contains eleven independently installable skills. It does not include hosted-service launchers, browser authentication helpers, remote debugger drivers, or timeline-query clients.
+Each skill can be installed independently. Its references and examples travel with it.
 
 License and attribution information is in `LICENSE` and `NOTICE`. Operational instructions do not require that history.

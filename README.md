@@ -12,6 +12,8 @@ The skills use existing .NET libraries and repository conventions. They do not r
 | [dotnet-reliability-research](dotnet-reliability-research/SKILL.md) | Discover concrete properties and select suitable test methods |
 | [dotnet-feature-workload](dotnet-feature-workload/SKILL.md) | Build a workload for one feature |
 | [dotnet-workload](dotnet-workload/SKILL.md) | Implement a property from an existing catalog |
+| [dotnet-coyote](dotnet-coyote/SKILL.md) | Explore .NET task schedules and replay a race in compiled code |
+| [dotnet-fstar](dotnet-fstar/SKILL.md) | Prove a contract in F* and call the extracted function from F# |
 | [dotnet-mutation-testing](dotnet-mutation-testing/SKILL.md) | Check whether realistic defects are detected |
 | [dotnet-test-setup](dotnet-test-setup/SKILL.md) | Prepare local hosts and real dependencies |
 | [dotnet-test-setup-k8s](dotnet-test-setup-k8s/SKILL.md) | Prepare a scoped Kubernetes test environment |
@@ -71,6 +73,6 @@ These checks validate structure and examples. They do not certify every library 
 
 The [eval harness](evals/README.md) runs tasks with and without each skill on Claude Code, Codex, and opencode, and grades both results.
 
-The package contains only the eleven .NET skills listed above. It has no hosted-service launch, browser authentication, remote debugger, or timeline-query skill.
+Each skill follows the [Agent Skills format](https://agentskills.io/home). Install either tool skill on its own to get its F# reference and runnable example.
 
 See [prerequisites](PREREQUISITES.md), [contributing](CONTRIBUTING.md), and [license notices](NOTICE).

@@ -3,7 +3,7 @@
 - [summary.md](summary.md): repository snapshot.
 - [terminology.md](terminology.md): shared terms.
 - [practices.md](practices.md): skill rules, checks, and evaluation rules.
-- [skills/summary.md](skills/summary.md): the eleven skills, their purpose, and their evaluation evidence.
+- [skills/summary.md](skills/summary.md): the installable skills, their purpose, and their evaluation evidence.
 - [evals/summary.md](evals/summary.md): eval harness index.
   - [evals/harness.md](evals/harness.md): runner, workspaces, isolation, metrics, regrade, agreement.
   - [evals/grader-contract.md](evals/grader-contract.md): checks, code-running graders, rubric judge, grader tests.

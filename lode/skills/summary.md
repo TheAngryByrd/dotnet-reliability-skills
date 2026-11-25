@@ -8,6 +8,8 @@ Each skill is a root-level directory. The table gives its purpose and its curren
 | [`dotnet-review-inputs`](../../dotnet-review-inputs/SKILL.md) | Review FsCheck, Hedgehog, and custom generators for state-space limits, read-only | Harness task `icedtasks-properties`; manual: Fantomas |
 | [`dotnet-feature-workload`](../../dotnet-feature-workload/SKILL.md) | Build or reuse a focused workload for one feature | Manual: Fantomas, IcedTasks; executable examples |
 | [`dotnet-workload`](../../dotnet-workload/SKILL.md) | Implement properties from an existing catalog | Manual: FsToolkit |
+| [`dotnet-coyote`](../../dotnet-coyote/SKILL.md) | Explore schedules on a compatible .NET path and replay a failure | [F# permit workload and race replay](../../docs/evaluations/2026-11-24-coyote-fstar/README.md) |
+| [`dotnet-fstar`](../../dotnet-fstar/SKILL.md) | Verify an F* contract and extract F# for production or conformance tests | [Permit proof, rejected defect, and F# caller](../../docs/evaluations/2026-11-24-coyote-fstar/README.md) |
 | [`dotnet-mutation-testing`](../../dotnet-mutation-testing/SKILL.md) | Check whether tests detect realistic defects with Stryker.NET or isolated manual mutants | Harness task `require-guards`; manual: IcedTasks, FsToolkit |
 | [`dotnet-test-audit`](../../dotnet-test-audit/SKILL.md) | Audit tests for regression value, redundancy, and coupling | Manual: audit of the executable examples |
 | [`dotnet-test-triage`](../../dotnet-test-triage/SKILL.md) | Investigate failed, hung, flaky, or unexercised tests from runtime evidence | Manual: IcedTasks, FsAutoComplete |
