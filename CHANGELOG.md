@@ -2,6 +2,10 @@
 
 Changes to the .NET reliability skills, newest first.
 
+## 2026-11-25
+
+- Add Coyote and F* skills for F# ([PR #9](https://github.com/TheAngryByrd/dotnet-reliability-skills/pull/9))
+
 ## 2026-11-04
 
 - feat: add stateful and model-based testing guidance for F# ([PR #8](https://github.com/TheAngryByrd/dotnet-reliability-skills/pull/8))
